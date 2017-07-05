@@ -5,6 +5,8 @@ let express = require('express'),
 router.post('/', function (req, res) {
     var username = req.body.userName || '',
         password = req.body.password || '';
+    console.log(req.body);
+    console.log(req.body.userName,req.body.password);
 
     login(username, password, function (status, results) {
         res.status(status);

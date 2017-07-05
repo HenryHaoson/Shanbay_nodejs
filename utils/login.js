@@ -7,7 +7,7 @@ exports.login = function(username, password, callback) {
             password: password.trim()
         },results = {};
 
-    if (username.trim() === '' || password.trim() == '') {
+    if (username.trim() == '' || password.trim() == '') {
         results = {
             errMsg: '用户名或密码不能为空'
         };
