@@ -2,7 +2,7 @@ let express = require('express'),
     router = express.Router(),
     login = require('../utils/login').login;
 
-router.post('/login', function (req, res) {
+router.post('/', function (req, res) {
     var username = req.body.userName || '',
         password = req.body.password || '';
 
