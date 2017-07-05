@@ -13,3 +13,4 @@ let config= {
         supportBigNumbers: true,
     }
 }
+module.exports=config;

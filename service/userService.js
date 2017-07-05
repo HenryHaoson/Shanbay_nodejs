@@ -1,4 +1,4 @@
-var userDAL = require(APP_PATH + '/dal/userDAL');
+var userDAL = require('../dal/userDAL');
 
 /**
  * data: {

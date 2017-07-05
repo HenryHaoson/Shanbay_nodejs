@@ -1,6 +1,14 @@
 let express = require('express'),
     router = express.Router(),
-    login = require(APP_PATH + '/utils/login').login;
+    login = require('../utils/login').login;
 
+router.post('/login', function (req, res) {
+    var username = req.body.userName || '',
+        password = req.body.password || '';
 
+    login(username, password, function (status, results) {
+        res.status(status);
+        return res.json(results);
+    });
+});
 module.exports = router;

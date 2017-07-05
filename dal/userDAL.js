@@ -1,4 +1,4 @@
-var db = require(APP_PATH + '/db/db');
+var db = require('../db/db');
 
 exports.queryUsers = function (data, callback) {
     var sql = 'select userId , userName ,password , groupId' +

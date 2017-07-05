@@ -1,5 +1,5 @@
 
-let userService = require(APP_PATH + '/service/userService');
+let userService = require('../service/userService');
 
 exports.login = function(username, password, callback) {
     let queryData = {
