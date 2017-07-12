@@ -25,3 +25,19 @@ exports.queryUsers = function (data, callback) {
     })
 
 };
+
+exports.addUser = function (data, callback) {
+    let queryData = {
+        'userName': data.userName || '',
+        'password': data.password || '',
+    };
+
+    userDAL.addUser(queryData, function (err, results) {
+        if (err) {
+            return callback(true, results);
+        }
+
+        return callback(false, results);
+    })
+
+};
