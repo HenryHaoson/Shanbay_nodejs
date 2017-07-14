@@ -8,11 +8,15 @@ let appEverydaySentence=require('./everydaySentence');
 let appgetEverydayWord=require('./getEverydayWord');
 let appAddNewWord=require('./addNewWord');
 let appQueryNewWord=require('./queryNewWord');
+let appStudy=require('./study');
+let appgetIntegration=require('./getIntegration');
 
 router.use('/login', appLogin);
 router.use('/register',appRegister);
 router.use('/everydaySentence',appEverydaySentence);
-router.use('/getEverydayWord',appgetEverydayWord);
+router.use('/getDailyWord',appgetEverydayWord);
 router.use('/addNewWord',appAddNewWord);
 router.use('/queryNewWord',appQueryNewWord);
+router.use('/study',appStudy);
+router.use('/getIntegration',appgetIntegration);
 module.exports = router;

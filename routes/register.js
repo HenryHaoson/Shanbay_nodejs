@@ -1,6 +1,7 @@
 let express = require('express'),
     router = express.Router();
 let userService = require('../service/userService');
+let integrationService=require('../service/IntegrationService');
 
 router.post('/', function (req, res) {
     var username = req.body.userName || '',
@@ -50,8 +51,25 @@ router.post('/', function (req, res) {
                         msg: '注册成功',
                         data: {}
                     };
-                    res.json(results);
-                    // return callback(200, results);
+                    //注册后查找userId
+                    userService.queryUsers({userName:req.body.userName},function (err,queryresults) {
+                          if (queryresults && queryresults.length === 1) {
+                              //添加用户的积分信息
+                            integrationService.addIntegration({userId:queryresults[0].userId},function (err,callback) {
+                                if (err) {
+                                    results = {
+                                        code: 400,
+                                        msg: '添加积分信息出错',
+                                        data: {}
+                                    };
+                                    res.json(results);
+                                }else {
+                                    res.json(results);
+                                }
+                            });
+                         }
+                    });
+
                 }
             });
         }

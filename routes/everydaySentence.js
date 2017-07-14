@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
             // return callback(500, results);
             res.json(results);
         }
-        if (results && results.length != 0) {
+        if (results && results.length !== 0) {
             results={
                 code:200,
                 msg:'获取成功',

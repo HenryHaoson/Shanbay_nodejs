@@ -70,3 +70,39 @@ exports.addUser = function (userInfo, callback) {
         });
     });
 };
+
+exports.updateUser = function (userId, userInfo, callback) {
+    let sql = 'update user set ',
+    updateSQL = '';
+
+    for (let key in userInfo) {
+        if (userInfo[key] !== '') {
+            if(updateSQL.length === 0) {
+                updateSQL += key + " = '" + userInfo[key] + "'";
+            } else {
+                updateSQL += ' , ' + key + " = '" + userInfo[key] + "'";
+            }
+        }
+    }
+
+    sql += updateSQL + " where userId = '" + userId + "'";
+
+    console.log('修改用户信息：' + sql);
+
+    db.mysqlPool.getConnection(function(err, connection) {
+        if (err) {
+            errAlert('数据库连接失败！' + err, 'userDAL.updateUser()');
+            return callback(true, '连接数据库失败');
+        }
+
+        connection.query(sql, function(err, results) {
+            connection.release();
+
+            if (err) {
+                errAlert('sql语句：' + err, 'userDAL.updateUser()');
+                return callback(true, '修改失败');
+            }
+            return callback(false, results);
+        });
+    });
+};
