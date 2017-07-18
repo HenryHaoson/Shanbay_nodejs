@@ -10,13 +10,15 @@ let appAddNewWord=require('./addNewWord');
 let appQueryNewWord=require('./queryNewWord');
 let appStudy=require('./study');
 let appgetIntegration=require('./getIntegration');
+let appUpload=require('./upload');
 
 router.use('/login', appLogin);
 router.use('/register',appRegister);
 router.use('/everydaySentence',appEverydaySentence);
 router.use('/getDailyWord',appgetEverydayWord);
 router.use('/addNewWord',appAddNewWord);
-router.use('/queryNewWord',appQueryNewWord);
+router.use('/getNewWord',appQueryNewWord);
 router.use('/study',appStudy);
 router.use('/getIntegration',appgetIntegration);
+router.use('/upload',appUpload);
 module.exports = router;

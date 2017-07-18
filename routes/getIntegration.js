@@ -25,8 +25,10 @@ router.post('/', function (req, res) {
         }else {
             results = {
                 code:200,
-                msg:'生成积分成功',
-                data:results
+                msg:'获取积分成功',
+                data:{
+                    personIntegration:results[0].personIntegration
+                }
             }
             res.json(results);
         }

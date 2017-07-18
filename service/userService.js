@@ -41,3 +41,18 @@ exports.addUser = function (data, callback) {
     })
 
 };
+exports.updateUser = function (userId,data, callback) {
+    let queryData = {
+        'userName': data.userName || '',
+        'password': data.password || '',
+    };
+
+    userDAL.updateUser(userId,data, function (err, results) {
+        if (err) {
+            return callback(true, results);
+        }
+
+        return callback(false, results);
+    })
+
+};

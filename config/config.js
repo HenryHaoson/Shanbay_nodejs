@@ -10,9 +10,13 @@ let config= {
         host: '127.0.0.1',
         user: 'root',
         password: '123456',
-        database: 'shanbay',
+        database: 'Shanbay',
         connectionLimit: 100,
         supportBigNumbers: true,
+        charset:'UTF8_GENERAL_CI'
+    },
+    upload: {
+        path: process.cwd() + '/uploads'
     }
 }
 module.exports=config;
