@@ -1,12 +1,11 @@
-
 let userService = require('../service/userService');
-let jwtHelper=require('./jwtHelper');
+let jwtHelper = require('./jwtHelper');
 
-exports.login = function(username, password, callback) {
+exports.login = function (username, password, callback) {
     let queryData = {
-            userName: username.trim(),
-            password: password.trim()
-        },results = {};
+        userName: username.trim(),
+        password: password.trim()
+    }, results = {};
 
     if (username.trim() == '' || password.trim() == '') {
         results = {
@@ -24,15 +23,15 @@ exports.login = function(username, password, callback) {
         }
         console.log(results)
         if (results && results.length === 1) {
-         //   要加密的数据，以后用户请求时使用，可以解析出数据来使用。
+            //   要加密的数据，以后用户请求时使用，可以解析出数据来使用。
             let tokenData = {
                 userId: results[0].userId,
-                userName: results[0].userName,
+                // userName: results[0].userName,
             };
-            let token=jwtHelper.generateToken(tokenData,'1000d');
-            results={
-                code:200,
-                msg:"登陆成功",
+            let token = jwtHelper.generateToken(tokenData, '1000d');
+            results = {
+                code: 200,
+                msg: "登陆成功",
                 data: {
                     token: token,
                     userData: results[0]
@@ -44,9 +43,9 @@ exports.login = function(username, password, callback) {
 
         } else {
             results = {
-                code:400,
+                code: 400,
                 msg: '用户名密码错误',
-                data:{}
+                data: {}
             };
             callback(400, results);
 

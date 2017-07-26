@@ -11,6 +11,7 @@ let appQueryNewWord=require('./queryNewWord');
 let appStudy=require('./study');
 let appgetIntegration=require('./getIntegration');
 let appUpload=require('./upload');
+let appCreateGroup=require('./createGroup');
 
 router.use('/login', appLogin);
 router.use('/register',appRegister);
@@ -21,4 +22,5 @@ router.use('/getNewWord',appQueryNewWord);
 router.use('/study',appStudy);
 router.use('/getIntegration',appgetIntegration);
 router.use('/upload',appUpload);
+router.use('/createGroup',appCreateGroup);
 module.exports = router;

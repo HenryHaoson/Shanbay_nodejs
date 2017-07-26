@@ -13,7 +13,7 @@ let config= {
         database: 'Shanbay',
         connectionLimit: 100,
         supportBigNumbers: true,
-        charset:'UTF8_GENERAL_CI'
+        // charset:'UTF8_GENERAL_CI'
     },
     upload: {
         path: process.cwd() + '/uploads'

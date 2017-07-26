@@ -1,7 +1,7 @@
 var db = require('../db/db');
 
 exports.addGroup = function (groupInfo, callback) {
-    let sql = "INSERT INTO group set ";
+    let sql = "INSERT INTO `group` set ";
 
     let addSql = '';
 
@@ -17,7 +17,7 @@ exports.addGroup = function (groupInfo, callback) {
 
     sql += addSql;
 
-    console.log('增加用户信息：' + sql);
+    console.log('增加小组信息：' + sql);
 
     db.mysqlPool.getConnection(function (err, connection) {
         if (err) {
@@ -39,7 +39,7 @@ exports.addGroup = function (groupInfo, callback) {
 
 exports.queryGroup = function (data, callback) {
     var sql = 'select groupId , groupName ,groupDescription ,groupBirth ,leaderId ,leaderName ,groupUrl ' +
-        'from group where 1=1';
+        'from `group` where 1=1';
 
     for (let key in data) {
         if (data[key] !== '') {
@@ -68,28 +68,28 @@ exports.queryGroup = function (data, callback) {
 };
 
 exports.deleteGroup = function (data, callback) {
-    var sql = 'delete from group where 1=1';
+    var sql = 'delete from `group` where 1=1';
     for (let key in data) {
         if (data[key] !== '') {
             sql += ' and ' + key + " = '" + data[key] + "'";
         }
     }
-    console.log('删除小组：'+sql);
+    console.log('删除小组：' + sql);
 
-    db.mysqlPool.getConnection(function (err,connection){
-        if(err){
-            errAlert('数据库连接失败'+err,'groupDAL.deleteGroup()');
-            return callback(true,'数据库连接失败');
+    db.mysqlPool.getConnection(function (err, connection) {
+        if (err) {
+            errAlert('数据库连接失败' + err, 'groupDAL.deleteGroup()');
+            return callback(true, '数据库连接失败');
         }
 
-        connection.query(sql,function (err,results) {
+        connection.query(sql, function (err, results) {
             connection.release();
 
-            if(err){
-                errAlert('sql语句：'+err,'groupDAL.deleteGroup');
-                return callback(true,"删除失败");
+            if (err) {
+                errAlert('sql语句：' + err, 'groupDAL.deleteGroup');
+                return callback(true, "删除失败");
             }
-            return callback(false,results);
+            return callback(false, results);
         });
     });
 }
