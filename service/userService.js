@@ -42,12 +42,13 @@ exports.addUser = function (data, callback) {
 
 };
 exports.updateUser = function (conditionData,data, callback) {
-    let queryData = {
+    let updateData = {
         'userName': data.userName || '',
         'password': data.password || '',
+        'groupId':data.groupId || ''
     };
 
-    userDAL.updateUser(conditionData,data, function (err, results) {
+    userDAL.updateUser(conditionData,updateData, function (err, results) {
         if (err) {
             return callback(true, results);
         }

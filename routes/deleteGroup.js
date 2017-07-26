@@ -26,7 +26,7 @@ router.post('/', function (req, res) {
             };
             return res.json(results);
         }
-        let groupId=results[0].groupId;
+        let groupId = results[0].groupId;
         groupService.queryGroup({groupId: results[0].groupId}, function (err, results) {
             if (err) {
                 results = {
@@ -44,34 +44,34 @@ router.post('/', function (req, res) {
                     };
                     res.json(results);
                 } else {
-                userService.updateUser({groupId:groupId},{groupId:0},function (err,results) {
-                   if(err){
-                       results = {
-                           code: 410,
-                           msg: '修改组员时出错',
-                           data: {}
-                       };
-                       res.json(results);
-                   } else {
-                      groupService.deleteGroup({groupId:groupId},function (err,results) {
-                         if(err){
-                             results = {
-                                 code: 420,
-                                 msg: '删除小组时出错',
-                                 data: {}
-                             };
-                             res.json(results);
-                         }else {
-                             results = {
-                                 code: 200,
-                                 msg: '删除小组成功',
-                                 data: {}
-                             };
-                             res.json(results);
-                         }
-                      });
-                   }
-                });
+                    userService.updateUser({groupId: groupId}, {groupId: 0}, function (err, results) {
+                        if (err) {
+                            results = {
+                                code: 410,
+                                msg: '修改组员时出错',
+                                data: {}
+                            };
+                            res.json(results);
+                        } else {
+                            groupService.deleteGroup({groupId: groupId}, function (err, results) {
+                                if (err) {
+                                    results = {
+                                        code: 420,
+                                        msg: '删除小组时出错',
+                                        data: {}
+                                    };
+                                    res.json(results);
+                                } else {
+                                    results = {
+                                        code: 200,
+                                        msg: '删除小组成功',
+                                        data: {}
+                                    };
+                                    res.json(results);
+                                }
+                            });
+                        }
+                    });
 
                 }
             }

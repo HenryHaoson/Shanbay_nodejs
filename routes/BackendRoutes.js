@@ -15,6 +15,7 @@ let appCreateGroup=require('./createGroup');
 let appLeaveGroup=require('./leaveGroup');
 let appGetGroupMembers=require('./getGroupMembers');
 let appDeleteGroup=require('./deleteGroup');
+let appJoinGroup=require('./joinGroup');
 
 router.use('/login', appLogin);
 router.use('/register',appRegister);
@@ -29,5 +30,6 @@ router.use('/createGroup',appCreateGroup);
 router.use('/leaveGroup',appLeaveGroup);
 router.use('/getGroupMembers',appGetGroupMembers);
 router.use('/deleteGroup',appDeleteGroup);
+router.use('/joinGroup',appJoinGroup);
 
 module.exports = router;

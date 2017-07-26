@@ -1,6 +1,6 @@
 var groupDAL = require('../dal/groupDAL');
 
-exports.queryGroup= function (data, callback) {
+exports.queryGroup = function (data, callback) {
     let queryData = {
         'groupId': data.groupId || ''
     };
@@ -33,21 +33,21 @@ exports.addGroup = function (data, callback) {
 
 };
 
-exports.deleteGroup=function (data,callback) {
-  let deleteData ={
-      'groupId':data.groupId || '',
-      'groupName': data.groupName || '',
-      'groupDescription': data.groupDescription || '',
-      'leaderId': data.leaderId || '',
-      'leaderName': data.leaderName || '',
-      'groupBirth': data.groupBirth || ''
-  };
-  groupDAL.deleteGroup(deleteData,function (err,results) {
-      if (err) {
-          return callback(true, results);
-      }
-      return callback(false, results);
-  });
+exports.deleteGroup = function (data, callback) {
+    let deleteData = {
+        'groupId': data.groupId || '',
+        'groupName': data.groupName || '',
+        'groupDescription': data.groupDescription || '',
+        'leaderId': data.leaderId || '',
+        'leaderName': data.leaderName || '',
+        'groupBirth': data.groupBirth || ''
+    };
+    groupDAL.deleteGroup(deleteData, function (err, results) {
+        if (err) {
+            return callback(true, results);
+        }
+        return callback(false, results);
+    });
 
 
 };

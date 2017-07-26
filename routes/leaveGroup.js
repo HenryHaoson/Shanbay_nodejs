@@ -43,7 +43,7 @@ router.post('/', function (req, res) {
                     };
                     res.json(results);
                 } else {
-                    userService.updateUser(decodeToken.userId, {groupId: 0}, function (err, results) {
+                    userService.updateUser({userId:decodeToken.userId}, {groupId:'0'}, function (err, results) {
                         if (err) {
                             results = {
                                 code: 410,

@@ -74,7 +74,7 @@ exports.addUser = function (userInfo, callback) {
 exports.updateUser = function (conditionData, userInfo, callback) {
     let sql = 'update user set ',
         updateSQL = '';
-    let conditionSQL = 'where 1=1';
+    let conditionSQL = ' where 1=1 ';
 
     for (let key in userInfo) {
         if (userInfo[key] !== '') {
