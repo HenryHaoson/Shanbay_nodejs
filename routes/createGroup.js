@@ -1,4 +1,3 @@
-
 let express = require('express'),
     router = express.Router();
 let groupService = require('../service/groupService');
@@ -7,7 +6,7 @@ let jwtHelper = require('../utils/jwtHelper');
 let config = require('../config/config');
 
 router.post('/', function (req, res) {
-    var token = req.body.token || '';
+    let token = req.body.token || '';
     let decodeToken = jwtHelper.tokenDecode(token, config.jwt_secret);
     console.log(decodeToken);
     userService.queryUsers({userId: decodeToken.userId}, function (err, results) {
@@ -19,15 +18,15 @@ router.post('/', function (req, res) {
             };
             res.json(results);
         }
-        if (results[0].groupId != 0) {
+        if (results[0].groupId !== 0) {
             results = {
                 code: 410,
                 msg: '已加入小组，不能创建小组',
                 data: {}
-            }
+            };
             return res.json(results);
         }
-        var leaderName = results[0].userName;
+        let leaderName = results[0].userName;
         let addData = {
             leaderId: decodeToken.userId,
             leaderName: leaderName,
@@ -46,7 +45,7 @@ router.post('/', function (req, res) {
                 };
                 res.json(results);
             } else {
-                var groupId = results.insertId;
+                let groupId = results.insertId;
                 userService.updateUser(decodeToken.userId, {groupId: groupId}, function (err, results) {
                     if (err) {
                         results = {

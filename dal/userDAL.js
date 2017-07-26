@@ -1,7 +1,7 @@
 var db = require('../db/db');
 
 exports.queryUsers = function (data, callback) {
-    var sql = 'select userId , userName ,password , groupId ,headUrl ' +
+    var sql = 'select userId , userName , groupId ,headUrl ' +
         'from user where 1=1';
 
     for (let key in data) {

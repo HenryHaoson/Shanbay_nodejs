@@ -1,18 +1,11 @@
-var newWordDAL = require('../dal/groupDAL');
+var groupDAL = require('../dal/groupDAL');
 
-/**
- * data: {
- *  [userId] : 1,
- *  [wordId]: 'name',
- *  [wordContent]: 'password',
- * }
- */
 exports.queryGroup= function (data, callback) {
     let queryData = {
         'groupId': data.groupId || ''
     };
 
-    newWordDAL.queryGroup(queryData, function (err, results) {
+    groupDAL.queryGroup(queryData, function (err, results) {
         if (err) {
             return callback(true, results);
         }
@@ -31,11 +24,29 @@ exports.addGroup = function (data, callback) {
         'groupBirth': data.groupBirth || ''
     };
 
-    newWordDAL.addGroup(addData, function (err, results) {
+    groupDAL.addGroup(addData, function (err, results) {
         if (err) {
             return callback(true, results);
         }
         return callback(false, results);
-    })
+    });
+
+};
+
+exports.deleteGroup=function (data,callback) {
+  let deleteData ={
+      'groupName': data.groupName || '',
+      'groupDescription': data.groupDescription || '',
+      'leaderId': data.leaderId || '',
+      'leaderName': data.leaderName || '',
+      'groupBirth': data.groupBirth || ''
+  };
+  groupDAL.deleteGroup(deleteData,function (err,results) {
+      if (err) {
+          return callback(true, results);
+      }
+      return callback(false, results);
+  });
+
 
 };
