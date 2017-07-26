@@ -12,13 +12,13 @@ exports.queryUsers = function (data, callback) {
 
     console.log('查询用户信息：' + sql);
 
-    db.mysqlPool.getConnection(function(err, connection) {
+    db.mysqlPool.getConnection(function (err, connection) {
         if (err) {
             errAlert('数据库连接失败！' + err, 'userDAL.queryUsers()');
             return callback(true, '连接数据库失败');
         }
 
-        connection.query(sql, function(err, results) {
+        connection.query(sql, function (err, results) {
             connection.release();
 
             if (err) {
@@ -41,7 +41,7 @@ exports.addUser = function (userInfo, callback) {
 
     for (let key in userInfo) {
         if (userInfo[key] !== '') {
-            if(addSql.length === 0) {
+            if (addSql.length === 0) {
                 addSql += key + " = '" + userInfo[key] + "'";
             } else {
                 addSql += ' , ' + key + " = '" + userInfo[key] + "'";
@@ -53,13 +53,13 @@ exports.addUser = function (userInfo, callback) {
 
     console.log('增加用户信息：' + sql);
 
-    db.mysqlPool.getConnection(function(err, connection) {
+    db.mysqlPool.getConnection(function (err, connection) {
         if (err) {
             errAlert('数据库连接失败！' + err, 'userDAL.addUserInfo()');
             return callback(true, '连接数据库失败');
         }
 
-        connection.query(sql, function(err, results) {
+        connection.query(sql, function (err, results) {
             connection.release();
 
             if (err) {
@@ -71,31 +71,37 @@ exports.addUser = function (userInfo, callback) {
     });
 };
 
-exports.updateUser = function (userId, userInfo, callback) {
+exports.updateUser = function (conditionData, userInfo, callback) {
     let sql = 'update user set ',
-    updateSQL = '';
+        updateSQL = '';
+    let conditionSQL = 'where 1=1';
 
     for (let key in userInfo) {
         if (userInfo[key] !== '') {
-            if(updateSQL.length === 0) {
+            if (updateSQL.length === 0) {
                 updateSQL += key + " = '" + userInfo[key] + "'";
             } else {
                 updateSQL += ' , ' + key + " = '" + userInfo[key] + "'";
             }
         }
     }
+    for (let key in conditionData) {
+        if (conditionData[key] !== '') {
+            conditionSQL += ' and ' + key + " = '" + conditionData[key] + "'";
+        }
+    }
 
-    sql += updateSQL + " where userId = '" + userId + "'";
+    sql += updateSQL + conditionSQL;
 
     console.log('修改用户信息：' + sql);
 
-    db.mysqlPool.getConnection(function(err, connection) {
+    db.mysqlPool.getConnection(function (err, connection) {
         if (err) {
             errAlert('数据库连接失败！' + err, 'userDAL.updateUser()');
             return callback(true, '连接数据库失败');
         }
 
-        connection.query(sql, function(err, results) {
+        connection.query(sql, function (err, results) {
             connection.release();
 
             if (err) {

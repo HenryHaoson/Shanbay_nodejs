@@ -41,13 +41,13 @@ exports.addUser = function (data, callback) {
     })
 
 };
-exports.updateUser = function (userId,data, callback) {
+exports.updateUser = function (conditionData,data, callback) {
     let queryData = {
         'userName': data.userName || '',
         'password': data.password || '',
     };
 
-    userDAL.updateUser(userId,data, function (err, results) {
+    userDAL.updateUser(conditionData,data, function (err, results) {
         if (err) {
             return callback(true, results);
         }

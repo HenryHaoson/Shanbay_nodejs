@@ -35,6 +35,7 @@ exports.addGroup = function (data, callback) {
 
 exports.deleteGroup=function (data,callback) {
   let deleteData ={
+      'groupId':data.groupId || '',
       'groupName': data.groupName || '',
       'groupDescription': data.groupDescription || '',
       'leaderId': data.leaderId || '',

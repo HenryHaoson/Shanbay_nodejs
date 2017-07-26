@@ -68,10 +68,10 @@ exports.queryGroup = function (data, callback) {
 };
 
 exports.deleteGroup = function (data, callback) {
-    var sql = 'delete from `group` where 1=1';
+    var sql = 'delete from `group` where 1!=1';
     for (let key in data) {
         if (data[key] !== '') {
-            sql += ' and ' + key + " = '" + data[key] + "'";
+            sql += ' or ' + key + " = '" + data[key] + "'";
         }
     }
     console.log('删除小组：' + sql);

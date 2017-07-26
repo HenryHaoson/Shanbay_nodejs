@@ -10,7 +10,7 @@ function randomCount(count) {
     let a=new Array();
     for(i=0;i<count;){
         let ran=random(0,999);
-        if(a.indexOf(ran)==-1){
+        if(a.indexOf(ran)===-1){
             a.push(ran);
             i++;
         }
@@ -32,7 +32,7 @@ exports.getDalyWord = function(token,count, callback) {
                 return callback(500, results);
             }
             console.log(results);
-            if (results && results.length == count) {
+            if (results && results.length === count) {
                 //   要加密的数据，以后用户请求时使用，可以解析出数据来使用。
                 console.log(results);
                 results={
