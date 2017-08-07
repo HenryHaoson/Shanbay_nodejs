@@ -31,14 +31,14 @@ router.post('/', function (req, res) {
                    code:400,
                    msg:'你加入的是一个幽灵小组',
                    data:{}
-               }
+               };
                res.json(results);
            }else {
                results={
                    code:400,
                    msg:'获取小组成员成功',
                    data:results
-               }
+               };
                res.json(results);
            }
 
