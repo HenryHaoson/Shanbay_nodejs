@@ -42,23 +42,23 @@ router.post('/', function(req, res) {
         fs.rename(files.file.path,newpath,function(err){
             if(err){
                 console.error("改名失败"+err);
-                res.json({ 'code':400, 'msg': 'upload failed','data':{} });
+              return  res.json({ 'code':400, 'msg': 'upload failed','data':{} });
             }
-            userService.updateUser(decodeToken.userId,{headUrl:'images/'+avatarName},function (err,results) {
+            userService.updateUser({userId:decodeToken.userId},{headUrl:'images/'+avatarName},function (err,results) {
                 if(err){
                     results = {
                         code:400,
                         msg:'同步头像失败',
                         data:{}
                     };
-                    res.json(results);
+                  return  res.json(results);
                 }
                 results = {
                     code:200,
                     msg:'同步头像成功',
                     data:{}
                 };
-                res.json(results);
+               return res.json(results);
             });
         });
 
