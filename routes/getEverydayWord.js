@@ -1,11 +1,12 @@
 let express = require('express'),
     router = express.Router(),
-    getEverydayWord = require('../utils/getDalyWord').getDalyWord;
+    getEverydayWord = require('../utils/getDalyWord').getDailyWord;
 
 router.post('/', function (req, res) {
-    var token = req.body.token || '';
-    var count =req.body.count || '';
-    getEverydayWord(token, count, function (status, results) {
+    let token =req.body.token || '';
+    let count =req.body.count || '';
+    console.log(req.body.token);
+    getEverydayWord(token , count, function (status, results) {
         res.status(status);
         return res.json(results);
     });

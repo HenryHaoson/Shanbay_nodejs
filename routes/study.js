@@ -5,7 +5,8 @@ let jwtHelper=require('../utils/jwtHelper');
 let config=require('../config/config');
 
 router.post('/', function (req, res) {
-    var token=req.body.token || '';
+    console.log(req.body.token);
+    let token=req.body.token || '';
     let decodeToken=jwtHelper.tokenDecode(token,config.jwt_secret);
     console.log(decodeToken);
     let integrationData = {

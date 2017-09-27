@@ -13,7 +13,7 @@ exports.queryUsers = function (data, callback) {
         'userId': data.userId || '',
         'userName': data.userName || '',
         'password': data.password || '',
-        'groupId':data.groupId || ''
+        'groupId': data.groupId || ''
     };
 
     userDAL.queryUsers(queryData, function (err, results) {
@@ -41,14 +41,14 @@ exports.addUser = function (data, callback) {
     })
 
 };
-exports.updateUser = function (conditionData,data, callback) {
+exports.updateUser = function (conditionData, data, callback) {
     let updateData = {
         'userName': data.userName || '',
         'password': data.password || '',
-        'groupId':data.groupId || ''
+        'groupId': data.groupId || ''
     };
 
-    userDAL.updateUser(conditionData,updateData, function (err, results) {
+    userDAL.updateUser(conditionData, updateData, function (err, results) {
         if (err) {
             return callback(true, results);
         }
