@@ -45,7 +45,8 @@ exports.updateUser = function (conditionData, data, callback) {
     let updateData = {
         'userName': data.userName || '',
         'password': data.password || '',
-        'groupId': data.groupId || ''
+        'groupId': data.groupId || '',
+        'headUrl': data.headUrl || ''
     };
 
     userDAL.updateUser(conditionData, updateData, function (err, results) {
