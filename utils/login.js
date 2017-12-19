@@ -36,7 +36,7 @@ exports.login = function (username, password, callback) {
                     token: token,
                     userData: results[0]
                 }
-            }
+            };
 
             //注意：不能写成400，一定要是200
             return callback(200, results);

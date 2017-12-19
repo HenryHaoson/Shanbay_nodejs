@@ -8,7 +8,7 @@ let config=require('../config/config');
 let userService=require('../service/userService');
 router.post('/', function(req, res) {
     console.log('开始文件上传....');
-    var form = new formidable.IncomingForm();
+    let form = new formidable.IncomingForm();
     //设置编辑
     form.encoding = 'utf-8';
     //设置文件存储路径
@@ -22,22 +22,22 @@ router.post('/', function(req, res) {
     form.parse(req, function(err, fields, files) {
         console.log("uploading");
         console.log(fields);
-        var token =fields.token;
-        var decodeToken=jwtHelper.tokenDecode(token,config.jwt_secret);
+        let token =fields.token;
+        let decodeToken=jwtHelper.tokenDecode(token,config.jwt_secret);
         for(let i in files){console.log(i);console.log(files[i])}
-        var filename = files.file.name;
+        let filename = files.file.name;
         // 对文件名进行处理，以应对上传同名文件的情况
-        var nameArray = filename.split('.');
-        var type = nameArray[nameArray.length-1];
-        var name = '';
-        for(var i=0; i<nameArray.length-1; i++){
+        let nameArray = filename.split('.');
+        let type = nameArray[nameArray.length-1];
+        let name = '';
+        for(let i=0; i<nameArray.length-1; i++){
             name = name + nameArray[i];
         }
-        var rand = Math.random()*100 + 900;
-        var num = parseInt(rand, 10);
+        let rand = Math.random()*100 + 900;
+        let num = parseInt(rand, 10);
 
-        var avatarName = name + num +  '.' + type;
-        var newpath =  './public/images/'+avatarName;
+        let avatarName = name + num +  '.' + type;
+        let newpath =  './public/images/'+avatarName;
        // console.warn('oldpath:'+oldpath+' newpath:'+newpath);
         fs.rename(files.file.path,newpath,function(err){
             if(err){
@@ -56,7 +56,9 @@ router.post('/', function(req, res) {
                 results = {
                     code:200,
                     msg:'同步头像成功',
-                    data:{}
+                    data:{
+                        headUrl:'images/'+avatarName
+                    }
                 };
                return res.json(results);
             });
