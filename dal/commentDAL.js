@@ -1,27 +1,27 @@
 let db = require('../db/db');
 
-exports.addDongtai = function (dongtaiInfo, callback) {
-    let sql = "INSERT INTO dongtai set ";
+exports.addComment = function (commentInfo, callback) {
+    let sql = "INSERT INTO comment set ";
 
     let addSql = '';
 
     for (let key in dongtaiInfo) {
-        if (dongtaiInfo[key] !== '') {
+        if (commentInfo[key] !== '') {
             if (addSql.length === 0) {
-                addSql += key + " = '" + dongtaiInfo[key] + "'";
+                addSql += key + " = '" + commentInfo[key] + "'";
             } else {
-                addSql += ' , ' + key + " = '" + dongtaiInfo[key] + "'";
+                addSql += ' , ' + key + " = '" + commentInfo[key] + "'";
             }
         }
     }
 
     sql += addSql;
 
-    console.log('增加动态信息：' + sql);
+    console.log('增加评论信息：' + sql);
 
     db.mysqlPool.getConnection(function (err, connection) {
         if (err) {
-            errAlert('数据库连接失败！' + err, 'dongtaiDAL.addDongtai()');
+            errAlert('数据库连接失败！' + err, 'commentDAL.addComment()');
             return callback(true, '连接数据库失败');
         }
 
@@ -29,7 +29,7 @@ exports.addDongtai = function (dongtaiInfo, callback) {
             connection.release();
 
             if (err) {
-                errAlert('sql语句：' + err, 'dongtaiDAL.addDongtai()');
+                errAlert('sql语句：' + err, 'commentDAL.addComment()');
                 return callback(true, '增加动态失败');
             }
             return callback(false, results);
@@ -37,8 +37,8 @@ exports.addDongtai = function (dongtaiInfo, callback) {
     });
 };
 
-exports.queryDongtai = function (data, callback) {
-    let sql = 'select dongtaiId , dongtaiContent ,userId ,userName ,date ,likeCount ,likePeople ,commentCount ,commentIds ' +
+exports.queryComment = function (data, callback) {
+    let sql = 'select commentId , commentContent ,commentUserId ,commentUserName ,date ,commentedUserId ,commentedUserName  ' +
         'from dongtai where 1=1';
 
     for (let key in data) {
@@ -51,7 +51,7 @@ exports.queryDongtai = function (data, callback) {
 
     db.mysqlPool.getConnection(function (err, connection) {
         if (err) {
-            errAlert('数据库连接失败！' + err, 'dongtaiDAL.queryDongtai()');
+            errAlert('数据库连接失败！' + err, 'commentDAL.queryComment()');
             return callback(true, '连接数据库失败');
         }
 
@@ -59,7 +59,7 @@ exports.queryDongtai = function (data, callback) {
             connection.release();
 
             if (err) {
-                errAlert('sql语句：' + err, 'dongtaiDAL.queryDongtai()');
+                errAlert('sql语句：' + err, 'commentDAL.queryComment()');
                 return callback(true, '查询失败');
             }
             return callback(false, results);
@@ -67,18 +67,18 @@ exports.queryDongtai = function (data, callback) {
     });
 };
 
-exports.deleteDongtai = function (data, callback) {
-    let sql = 'delete from dongtai where 1!=1';
+exports.deleteComment = function (data, callback) {
+    let sql = 'delete from comment where 1!=1';
     for (let key in data) {
         if (data[key] !== '') {
             sql += ' or ' + key + " = '" + data[key] + "'";
         }
     }
-    console.log('删除动态：' + sql);
+    console.log('删除评论：' + sql);
 
     db.mysqlPool.getConnection(function (err, connection) {
         if (err) {
-            errAlert('数据库连接失败' + err, 'dongtaiDAL.deleteDongtai()');
+            errAlert('数据库连接失败' + err, 'commentDAL.deleteComment()');
             return callback(true, '数据库连接失败');
         }
 
@@ -86,7 +86,7 @@ exports.deleteDongtai = function (data, callback) {
             connection.release();
 
             if (err) {
-                errAlert('sql语句：' + err, 'dongtaiDAL.deleteDongtai');
+                errAlert('sql语句：' + err, 'commentDAL.deleteComment');
                 return callback(true, "删除失败");
             }
             return callback(false, results);
