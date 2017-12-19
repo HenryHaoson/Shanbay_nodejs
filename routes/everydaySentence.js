@@ -3,7 +3,7 @@ let express = require('express'),
 let everydaySenteceService = require('../service/everydaySentenceService');
 
 router.get('/', function (req, res) {
-    var results = {};
+    let results = {};
 
     everydaySenteceService.queryEverydaySentence(function (err, results) {
         if (err) {

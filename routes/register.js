@@ -4,9 +4,9 @@ let userService = require('../service/userService');
 let integrationService=require('../service/IntegrationService');
 
 router.post('/', function (req, res) {
-    var username = req.body.userName || '',
+    let username = req.body.userName || '',
         password = req.body.password || '';
-    var results = {};
+    let results = {};
     if (username.trim() == '' || password.trim() == '') {
         results = {
             code: 400,
@@ -30,7 +30,7 @@ router.post('/', function (req, res) {
             results = {
                 code: 400,
                 msg: '用户名已存在'
-            }
+            };
 
             res.json(results);
             // return callback(200, results);
@@ -77,7 +77,7 @@ router.post('/', function (req, res) {
             results = {
                 code: 400,
                 msg: '注册异常'
-            }
+            };
             res.json(results);
             // return callback(400, results);
         }

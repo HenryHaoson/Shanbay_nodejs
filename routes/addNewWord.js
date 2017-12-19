@@ -5,7 +5,7 @@ let jwtHelper=require('../utils/jwtHelper');
 let config=require('../config/config');
 
 router.post('/', function (req, res) {
-    var token=req.body.token || '';
+    let token=req.body.token || '';
     let decodeToken=jwtHelper.tokenDecode(token,config.jwt_secret);
     console.log(decodeToken);
     let addData = {
@@ -13,7 +13,7 @@ router.post('/', function (req, res) {
         wordId: req.body.wordId,
         wordContent: req.body.wordContent
     };
-    var results = {};
+    let results = {};
 
     wordService.addNewWord(addData,function (err, results) {
         if (err) {
@@ -29,7 +29,7 @@ router.post('/', function (req, res) {
                 code:200,
                 msg:'生词添加成功',
                 data:{}
-            }
+            };
             res.json(results);
         }
     })
