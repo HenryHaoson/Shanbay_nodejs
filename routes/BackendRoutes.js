@@ -18,6 +18,9 @@ let appDeleteGroup=require('./deleteGroup');
 let appJoinGroup=require('./joinGroup');
 let appGetGroups=require('./getGroups');
 let appGetGroupComments=require('./getGroupComments');
+//dongtai
+let appDeleteDongtai = require('./dongtai/deleteDongtai');
+let appAddDongtai=require('./dongtai/addDongtai');
 
 router.use('/login', appLogin);
 router.use('/register',appRegister);
@@ -35,5 +38,8 @@ router.use('/deleteGroup',appDeleteGroup);
 router.use('/joinGroup',appJoinGroup);
 router.use('/getGroups',appGetGroups);
 router.use('/getGroupComments',appGetGroupComments);
+//dongtai
+router.use('/deleteDongtai',appDeleteDongtai);
+router.use('/addDongtai',appAddDongtai);
 
 module.exports = router;

@@ -16,13 +16,12 @@ router.post('/', function (req, res) {
 
     dongtaiService.deleteDongtai(deleteData,function (err, results) {
         if (err) {
-
-             return callback(200, results);
             res.json(results);
+            return callback(200, results);
         }else {
             results = {
                 code:200,
-                msg:'生词添加成功',
+                msg:'删除动态成功',
                 data:{}
             };
             res.json(results);
