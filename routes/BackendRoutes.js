@@ -21,6 +21,7 @@ let appGetGroupComments=require('./getGroupComments');
 //dongtai
 let appDeleteDongtai = require('./dongtai/deleteDongtai');
 let appAddDongtai=require('./dongtai/addDongtai');
+let appSendGroupComment=require('./group/sendGroupComment');
 
 router.use('/login', appLogin);
 router.use('/register',appRegister);
@@ -41,5 +42,7 @@ router.use('/getGroupComments',appGetGroupComments);
 //dongtai
 router.use('/deleteDongtai',appDeleteDongtai);
 router.use('/addDongtai',appAddDongtai);
+
+router.use('/sendGroupComment',appSendGroupComment);
 
 module.exports = router;

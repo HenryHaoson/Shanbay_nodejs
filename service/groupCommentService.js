@@ -9,3 +9,13 @@ exports.queryGroupComment = function (groupId, callback) {
         }
     });
 };
+
+exports.addGroupComment = function (groupComment,callback) {
+  dal.addComment(groupComment,function (err,results) {
+      if (err) {
+          return callback(true, results)
+      } else {
+          return callback(false, results)
+      }
+  });
+};
