@@ -21,7 +21,7 @@ router.post('/', function (req, res) {
         } else {
             results = {
                 code :200,
-                msg:'删除动态成功',
+                msg:'添加动态成功',
                 data:results
             };
             return callback(200,results);

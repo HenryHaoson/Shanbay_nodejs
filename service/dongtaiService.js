@@ -21,6 +21,22 @@ exports.addDongtai = function (data, callback) {
 };
 
 
+exports.queryDongtai = function (data, callback) {
+    let queryData = {
+    };
+
+
+    dongtaiDAL.addDongtai(queryData, function (err, results) {
+        if (err) {
+            return callback(true, results);
+        }
+
+        return callback(false, results);
+    })
+
+};
+
+
 exports.deleteDongtai = async function (data, callback) {
     let queryData = {
         'dongtaiId': data.dongtaiId || ''
