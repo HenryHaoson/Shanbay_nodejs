@@ -5,7 +5,7 @@ let jwtHelper = require('../../utils/jwtHelper');
 let config = require('../../config/config');
 
 router.post('/', function (req, res) {
-    let token = req.body.token | '';
+    let token = req.body.token || '';
     let decodeToken = jwtHelper.tokenDecode(token, config.jwt_secret);
     let userId = decodeToken.userId;
     let addData = {
@@ -17,14 +17,13 @@ router.post('/', function (req, res) {
     dongtaiService.addDongtai(addData, function (err, results) {
         if (err) {
             res.json(results);
-            return callback(200, results);
         } else {
             results = {
                 code :200,
                 msg:'添加动态成功',
-                data:results
+                data:{}
             };
-            return callback(200,results);
+            res.json(results)
         }
     })
 

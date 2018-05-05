@@ -9,13 +9,3 @@ exports.queryEverydaySentence = function (callback) {
         return callback(false, results);
     })
 };
-
-exports.queryEverydaySentence = function (callback) {
-    everydaySentenceDAL(function (err, results) {
-        if (err) {
-            return callback(true, results);
-        }
-
-        return callback(false, results);
-    })
-};

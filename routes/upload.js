@@ -1,12 +1,12 @@
 let express = require('express'),
     router = express.Router();
-let formidable=require('formidable');
+let formidable = require('formidable');
 let fs = require('fs');
-let path= require("path");
-let jwtHelper=require('../utils/jwtHelper');
-let config=require('../config/config');
-let userService=require('../service/userService');
-router.post('/', function(req, res) {
+let path = require("path");
+let jwtHelper = require('../utils/jwtHelper');
+let config = require('../config/config');
+let userService = require('../service/userService');
+router.post('/', function (req, res) {
     console.log('开始文件上传....');
     let form = new formidable.IncomingForm();
     //设置编辑
@@ -19,53 +19,55 @@ router.post('/', function(req, res) {
     form.maxFieldsSize = 1024 * 1024 * 1024;
     //form.maxFields = 1000;  设置所以文件的大小总和
 
-    form.parse(req, function(err, fields, files) {
+    form.parse(req, function (err, fields, files) {
         console.log("uploading");
         console.log(fields);
-        let token =fields.token;
-        let decodeToken=jwtHelper.tokenDecode(token,config.jwt_secret);
-        for(let i in files){console.log(i);console.log(files[i])}
+        let token = fields.token;
+        let decodeToken = jwtHelper.tokenDecode(token, config.jwt_secret);
+        for (let i in files) {
+            console.log(i);
+            console.log(files[i])
+        }
         let filename = files.file.name;
         // 对文件名进行处理，以应对上传同名文件的情况
         let nameArray = filename.split('.');
-        let type = nameArray[nameArray.length-1];
+        let type = nameArray[nameArray.length - 1];
         let name = '';
-        for(let i=0; i<nameArray.length-1; i++){
+        for (let i = 0; i < nameArray.length - 1; i++) {
             name = name + nameArray[i];
         }
-        let rand = Math.random()*100 + 900;
+        let rand = Math.random() * 100 + 900;
         let num = parseInt(rand, 10);
 
-        let avatarName = name + num +  '.' + type;
-        let newpath =  './public/images/'+avatarName;
-       // console.warn('oldpath:'+oldpath+' newpath:'+newpath);
-        fs.rename(files.file.path,newpath,function(err){
-            if(err){
-                console.error("改名失败"+err);
-              return  res.json({ 'code':400, 'msg': 'upload failed','data':{} });
+        let avatarName = name + num + '.' + type;
+        let newpath = './public/images/' + avatarName;
+        // console.warn('oldpath:'+oldpath+' newpath:'+newpath);
+        fs.rename(files.file.path, newpath, function (err) {
+            if (err) {
+                console.error("改名失败" + err);
+                return res.json({'code': 400, 'msg': 'upload failed', 'data': {}});
             }
-            userService.updateUser({userId:decodeToken.userId},{headUrl:'images/'+avatarName},function (err,results) {
-                if(err){
+            userService.updateUser({userId: decodeToken.userId}, {headUrl: 'images/' + avatarName}, function (err, results) {
+                if (err) {
                     results = {
-                        code:400,
-                        msg:'同步头像失败',
-                        data:{}
+                        code: 400,
+                        msg: '同步头像失败',
+                        data: {}
                     };
-                  return  res.json(results);
+                    return res.json(results);
                 }
                 results = {
-                    code:200,
-                    msg:'同步头像成功',
-                    data:{
-                        headUrl:'images/'+avatarName
+                    code: 200,
+                    msg: '同步头像成功',
+                    data: {
+                        headUrl: 'images/' + avatarName
                     }
                 };
-               return res.json(results);
+                return res.json(results);
             });
         });
 
     });
-
 
 
 });
