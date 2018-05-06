@@ -23,10 +23,11 @@ exports.addDongtai = function (data, callback) {
 
 exports.queryDongtai = function (data, callback) {
     let queryData = {
+        "userId" : data.userId || ''
     };
 
 
-    dongtaiDAL.addDongtai(queryData, function (err, results) {
+    dongtaiDAL.queryDongtai(queryData, function (err, results) {
         if (err) {
             return callback(true, results);
         }

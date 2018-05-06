@@ -24,7 +24,12 @@ let appAddDongtai = require('./dongtai/addDongtai');
 let appSendGroupComment = require('./group/sendGroupComment');
 
 let appCommonUpload = require('./commonUpload');
-let appFetchDOngtai=require('./dongtai/fetchDongtai');
+let appFetchDongtai=require('./dongtai/fetchDongtai');
+let appLikeDongtai=require('./dongtai/likeDongtai');
+let appDislikeDongtai=require('./dongtai/dislikeDongtai');
+let appFetchLike=require('./dongtai/fetchLike');
+let appCommentDongtai=require('./dongtai/commentDongtai');
+let appfetchDongtaiComment=require('./dongtai/fetchComment');
 
 router.use('/login', appLogin);
 router.use('/register', appRegister);
@@ -45,9 +50,15 @@ router.use('/getGroupComments', appGetGroupComments);
 //dongtai
 router.use('/deleteDongtai', appDeleteDongtai);
 router.use('/addDongtai', appAddDongtai);
-router.use('/fetchDongtai',appFetchDOngtai);
+router.use('/fetchDongtai',appFetchDongtai);
 
 router.use('/sendGroupComment', appSendGroupComment);
 
 router.use('/commonUpload', appCommonUpload);
+router.use('/likeDongtai', appLikeDongtai);
+router.use('/dislikeDongtai', appDislikeDongtai);
+router.use('/fetchLike', appFetchLike);
+router.use('/commentDongtai', appCommentDongtai);
+router.use('/fetchDongtaiComment', appfetchDongtaiComment);
+
 module.exports = router;

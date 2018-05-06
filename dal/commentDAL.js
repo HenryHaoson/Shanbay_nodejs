@@ -5,7 +5,7 @@ exports.addComment = function (commentInfo, callback) {
 
     let addSql = '';
 
-    for (let key in dongtaiInfo) {
+    for (let key in commentInfo) {
         if (commentInfo[key] !== '') {
             if (addSql.length === 0) {
                 addSql += key + " = '" + commentInfo[key] + "'";
@@ -39,7 +39,7 @@ exports.addComment = function (commentInfo, callback) {
 
 exports.queryComment = function (data, callback) {
     let sql = 'select commentId , commentContent ,commentUserId ,commentUserName ,date ,commentedUserId ,commentedUserName  ' +
-        'from dongtai where 1=1';
+        'from comment where 1=1';
 
     for (let key in data) {
         if (data[key] !== '') {
